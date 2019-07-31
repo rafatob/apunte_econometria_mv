@@ -1,0 +1,1522 @@
+
+\section{Ejemplo de repaso clase anterior-Detrending global temperature}
+
+Como vimos en la clase anterior, la evoluci\'on de la temperatura global manifestaba una tendencia lineal, por lo que podemos asumir que esta puede ser escrita como:
+\begin{equation*} 
+x_t =\mu_{t} + y_t
+\end{equation*}
+Veremos dos maneras de descomponer la serie, \textquotedblleft filtrando\textquotedblright \ la tendencia.
+
+%---------------------------------------------------------
+%---------------------Slide 4 --------------------------
+%\begin{frame}
+%\frametitle{Ejemplo de repaso clase anterior\newline
+%	Detrending global temperature}
+
+%\only<1|handout:1>{
+%	\begin{exampleblock}{C\'odigo en R}
+%		rm(list=ls())\\
+%		mydata$<-$read.csv (``gtemp.csv")\\
+%		gtemp$<-$mydata$\$$``gtem"\\
+%		plot(gtemp, type=``o", ylab= ``Global Temperature Deviations'')\\
+%		t$<-$1:142\\
+%		summary(reg $<-$ lm(gtemp $\string ~$ t))\\
+%		plot(gtemp, type=``o", ylab=``Global Temperature Deviations'')\\
+%		abline(reg)\\
+%	\end{exampleblock}
+%}
+\lstset{caption=Ejemplo 1 Sacando la tendencia de la serie temperatura global,framexleftmargin=5mm, frame=shadowbox, rulesepcolor=\color{green}}
+\begin{lstlisting}[title={‘Código R: ejemplo 1 Obtención de la componente \textquotedblleft tendencia\textquotedblright de la serie temperatura global(gtemp).’},basicstyle=\ttfamily]{}
+rm(list=ls())
+mydata<-read.csv ("gtemp.csv")
+gtemp<-mydata$"gtem"
+plot(gtemp, type="o", ylab="Global Temperature Deviations")
+t<-1:142
+summary(reg <- lm(gtemp ~ t))
+plot(gtemp, type="o", ylab="Global Temperature Deviations")
+abline(reg)
+\end{lstlisting}
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 5--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo de repaso clase anterior\newline
+
+\begin{figure}[h!]
+	\centering
+	\textbf{Ejemplo 1: Detrending global temperature}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth,scale=0.5]{gtemp_graph.pdf}}
+	\caption{La figura muestra en línea punteada la tendencia de la serie de tiempo.}\label{fig1}
+\end{figure}
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 6--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo de repaso clase anterior\newline
+%	Detrending global temperature}
+
+\begin{figure}[p]
+	\centering
+	\textbf{Detrending global temperature}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth,scale=0.5]{reg_ej1.png}}
+	\caption{Parametría de la regresión de temperatura en el tiempo.}\label{fig2}
+\end{figure}
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 7 --------------------------
+%\begin{frame}
+%\frametitle{Ejemplo de repaso clase anterior\newline
+%	Detrending global temperature}
+
+%\only<1|handout:1>{
+%	\begin{exampleblock}{C\'odigo en R}
+%		reg1= lm(gtemp$\string ~$ time(gtemp), na.action=NULL) \\
+%		par(mfrow=c(2,1))\\
+%		plot(resid(reg1), type=``o", main=``detrended")\\
+%		plot(diff(gtemp), type=``o", main=``first difference")\\
+%	\end{exampleblock}
+%}
+\lstset{caption=Ejemplo 1 Detrending global temperature,framexleftmargin=5mm, frame=shadowbox, rulesepcolor=\color{green}}
+\begin{lstlisting}[title={‘Código R: ejemplo 1 Regresando gtemp sobre tiempo.’},basicstyle=\ttfamily]{}
+reg1= lm(gtemp~time(gtemp), na.action=NULL) 
+par(mfrow=c(2,1))
+plot(resid(reg1), type="o", main="detrended")
+plot(diff(gtemp), type="o", main="first difference")
+\end{lstlisting}
+%\end{frame}
+%=================================
+%---------------------Slide 8--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo de repaso clase anterior\newline
+%	Detrending global temperature}
+
+\begin{figure}[p]
+	\centering
+	\textbf{Ejemplo 1: Detrending global temperature}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth,scale=0.5]{detrended.pdf}}
+	\caption{Arriba: residuos de la regresión. Abajo:primeras diferencias de la serie original}\label{fig3}
+\end{figure}
+
+%\begin{figure}[p]
+%	\centering
+%	\textbf{Detrending global temperature}\par\medskip
+%	\fcolorbox{red}{yellow}{\includegraphics[width=\linewidth,scale=0.5]{detrended.pdf}}
+%	\caption{Arriba: residuos de la regresión. Abajo:primeras diferencias de la serie original}\label{fig3.2}
+%\end{figure}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 9 --------------------------
+%\begin{frame}
+%\frametitle{Ejemplo de repaso clase anterior\newline
+%Detrending global temperature}
+
+%\only<1|handout:1>{
+%\begin{exampleblock}{C\'odigo en R}
+%	par(mfrow=c(3,1)) \\
+%	acf(gtemp, 48, main=``gtemp")\\
+%	acf(resid(reg), 48, main=``detrended")\\
+%	acf(diff(gtemp), 48, main=``first difference")\\
+%\end{exampleblock}
+%}
+\lstset{caption=Ejemplo 1 Detrending global temperature,framexleftmargin=5mm, frame=shadowbox, rulesepcolor=\color{green}}
+\begin{lstlisting}[title={‘Código R: ejemplo 1 Correlogramas de series.’},basicstyle=\ttfamily]{}
+par(mfrow=c(3,1)) # plot ACFs
+acf(gtemp, 48, main="gtemp")
+acf(resid(reg), 48, main="detrended")
+acf(diff(gtemp), 48, main="first difference")
+\end{lstlisting}
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 10--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo de repaso clase anterior\newline
+%Detrending global temperature}
+
+\begin{figure}[p]
+	\centering
+	\textbf{Ejemplo 1: Autocorrelograma}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth,scale=0.5]{acf_example1.pdf}}
+	\caption{Autocorrelogramas para diferentes retardos(lags): Arriba:serie original. Medio: residuos de la regresión. Abajo: primera diferencia de la serie original}\label{fig4}
+\end{figure}
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 11--------------------------
+%\begin{frame}
+%\frametitle{Sobre la descomposici\'on de una serie}
+\section{Sobre la descomposici\'on de una serie}
+
+En los gr\'aficos podemos apreciar que la primera diferencia de la serie produce resultados diferentes a la eliminaci\'on de la tendencia mediante la regresi\'on de la tendencia.\\
+En el caso de los gr\'aficos ACF, el proceso diferenciado muestra una autocorrelaci\'on mi\'{\i}nima, lo que puede implicar que la serie de temperatura global es similar una caminata aleatoria con deriva.\\
+Es interesante notar que si la serie es una caminata aleatoria con deriva, la media de la serie diferenciada, que es una estimaci\'on de la deriva, es aproximadamente $,0066$, pero con un gran error est\'andar:\\
+%\only<1|handout:1>{
+%	\begin{exampleblock}{C\'odigo en R}
+%		mean (diff (gtemp))\\
+%		sd (diff (gtemp)) / sqrt (longitud (diff (gtemp)))
+%	\end{exampleblock}
+%}
+\lstset{caption=Ejemplo 1 Detrending global temperature,framexleftmargin=5mm, frame=shadowbox, rulesepcolor=\color{green}}
+\begin{lstlisting}[title={‘Código R: ejemplo 1: sobre la descomposición de una serie - media y error estandar’},basicstyle=\ttfamily]{}
+mean (diff(gtemp)) #media
+sd (diff (gtemp)) / sqrt (length(diff (gtemp))) #error estandar
+\end{lstlisting}
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 12--------------------------
+
+%\begin{frame}
+%\frametitle{Sobre la descomposici\'on de una serie}
+
+Una ventaja de diferenciar sobre la estimaci\'on de una tendencia,  para eliminar las tendencias, es que no se estiman par\'ametros en la operaci\'on de diferenciaci\'on. Una desventaja, sin embargo, es que la diferenciaci\'on no arroja una estimaci\'on del proceso estacionario $y_t$.\\
+%\vspace{5mm}	 
+De esta forma, si una estimaci\'on de $y_t$ es esencial, entonces la estimación de una tendencia puede ser la forma más apropiada para eliminar las tendencias de la serie. Si el objetivo es forzar los datos a la estacionaridad, entonces la diferenciaci\'on puede ser m\'as apropiada. La diferenciaci\'on tambi\'en es una herramienta viable si la tendencia es fija.\\
+%\vspace{3mm}	
+En EE.UU. el procedimiento oficial de descomposici\'on y ajuste estacional se llama:\\
+%\vspace{3mm}	
+\textbf{X-13-ARIMA (http://www.census.gov/srd/www/x13as/)}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 13--------------------------
+
+%\begin{section}{Procesos no estacionarios, integrados y el test de ra\'{\i}z unitaria}
+\section{Procesos no estacionarios, integrados y el test de ra\'{\i}z unitaria}
+%\begin{frame}
+%\frametitle{Procesos no estacionarios, integrados y el test de ra\'{\i}z unitaria}
+
+Recordemos que si una serie de tiempo es estacionaria, su media, su varianza y su autocovarianza (en diferentes rezagos) permanecen iguales sin importar el momento del tiempo en el cual se midan; es decir, son \textbf{invariantes respecto al tiempo}.
+\par
+Por otro lado, hemos visto que la estacionaridad es una caracter\'{\i}stica deseable, por ejemplo, en t\'erminos de la normalidad de las variables. Sin embargo, en la pr\'actica nos encontramos con:
+\par
+%\only<1->{
+\begin{itemize}
+	\item[(i)] Procesos No-estacionarios: Cuando un proceso estoc\'astico de series de tiempo es dependiente del tiempo.
+	\item[(ii)] Procesos Integrados: un proceso no-estacionario, el cual puede ser transformado a proceso estacionario diferenciando.
+\end{itemize}
+%}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 14--------------------------
+%\begin{frame}
+%\frametitle{Procesos Integrados}
+\subsection{Procesos Integrados}
+
+Con respecto a los Procesos Integrados, partimos definiendo:
+%\only<1->{
+	\begin{itemize}
+		\item La secuencia $\{x_t\}$ es integrada de orden $d$, $I(d)$, si esta requiere ser diferenciada $d$ veces para llegar a ser estacionaria.
+		\item Todos los \textbf{Procesos Integrados son no-estacionarios}, pero no todos los procesos no-estacionarios son integrados.
+		\item Si la secuencia $\{x_t\}$  tiene una ra\'{\i}z unitaria, entonces, es un proceso integrado, y de aqu\'{\i} no-estacionario.
+	\end{itemize}
+%}
+%
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 15--------------------------
+%\begin{frame}
+%\frametitle{Consecuencias de los Procesos Integrados (Ra\'{\i}z Unitaria)}
+\subsection{Consecuencias de los Procesos Integrados (Ra\'{\i}z Unitaria)}
+%\only<1->{
+\begin{itemize}
+	\item Es importante se\~nalar que los test estad\'{\i}sticos est\'andares no son apropiados cuando los MCO (OLS) son aplicados a procesos integrados, ver por ejemplo \cite{granger1974spurious}.
+	\item Si la secuencia $\{x_t\}$ es un proceso de ra\'{\i}z unitaria, entonces, cualquier shock tiene un efecto permanente (que no decae). De aqu\'{\i}, la serie de tiempo es modelada apropiadamente suponiendo una tendencia estoc\'astica. La serie de tiempo entonces puede ser definida como estacionaria diferenciable, y se le deber\'a sacar la tendencia diferenciando. 
+	\item En este contexto, \textbf{los t\'erminos no-estacionariedad, caminata aleatoria, ra\'{\i}z unitaria y tendencia estoc\'astica se consideran sin\'onimos}. 
+\end{itemize}
+%}
+%
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 16--------------------------
+%\begin{frame}
+%\frametitle{Test de Ra\'{\i}z Unitaria}
+\subsection{Test de Ra\'{\i}z Unitaria}
+Considere el siguiente proceso autoregresivo:
+
+\begin{equation} \label{AR1}
+x_t =\alpha_1 x_{t-1} + \epsilon_t
+\end{equation}
+
+Si $\alpha_1=1$, la secuencia $x_t$ es una ra\'{\i}z unitaria.
+
+El test est\'andar para probar esta hip\'otesis, consiste en restar $x_{t-1}$ a la ecuaci\'on anterior de forma que:
+
+\begin{equation}
+\triangle x_t =\gamma x_{t-1} + \epsilon_t
+\end{equation}
+
+donde $\gamma=\alpha_1-1$, y $\triangle x_t = x_t - x_{t-1}$. En este contexto, probar la hip\'otesis que la ecuaci\'on (1) tiene una ra\'{\i}z unitaria, $\alpha_1 = 1$, es equivalente a probar la hip\'otesis de $\gamma=0$ en ecuaci\'on (2). 
+Este es b\'asicamente el enfoque de Dickey-Fuller (DF) para ra\'{\i}ces unitarias, ver por ejemplo \cite{dickey1981likelihood}. Adicionalmente existe el test aumentado de Dickey-Fuller (ADF), y muchos otros tests que se basan el l\'ogicas similares, y que utilizaremos durante el curso.
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 17 --------------------------
+%\begin{frame}
+%\frametitle{Ejemplo de Test de Ra\'{\i}z Unitaria - Dickey-Fuller}
+\subsubsection{Ejemplo de Test de Ra\'{\i}z Unitaria - Dickey-Fuller}
+%\only<1|handout:1>{
+%\begin{exampleblock}{C\'odigo en R}
+%install.packages(``tseries")\\
+%library(tseries)\\
+%adf.test(gtemp)\\
+%adf.test(resid(reg1))\\
+%adf.test(diff(gtemp))\\
+%\end{exampleblock}
+%}
+\lstset{caption=Ejemplo ,framexleftmargin=5mm, frame=shadowbox, rulesepcolor=\color{green}}
+\begin{lstlisting}[title={‘Código R: Ejemplo Test de Raíz Unitaria - Dickey-Fuller ’},basicstyle=\ttfamily]{}
+library(tseries)
+adf.test(gtemp)
+adf.test(resid(reg1))
+adf.test(diff(gtemp))
+\end{lstlisting}
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 18 --------------------------
+%\begin{frame}
+%\frametitle{Ejemplo de Test de Ra\'{\i}z Unitaria - Dickey-Fuller}
+%\begin{mdframed}[style=MyFrame]
+%Augmented Dickey-Fuller Test\\
+%data:  gtemp\\
+%Dickey-Fuller = -2.0624, Lag order = 5, p-value =
+%0.5505\\
+%alternative hypothesis: stationary\\
+%\vspace{5mm}	    
+%Augmented Dickey-Fuller Test\\
+%data:  resid(reg1)\\
+%Dickey-Fuller = -2.0624, Lag order = 5, p-value =
+%0.5505\\
+%alternative hypothesis: stationary\\
+%\vspace{5mm}	    
+%Augmented Dickey-Fuller Test\\
+%data:  diff(gtemp)\\
+%Dickey-Fuller = -6.8179, Lag order = 5, p-value = 0.01\\
+%alternative hypothesis: stationary\\
+%\end{mdframed}
+
+\begin{figure}[h]
+	\centering
+	\textbf{Ejemplo: Resultados de Test de Raíz Unitaria - Dickey-Fuller}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth,scale=0.5]{adf_ejRaizUnitaria.png}}
+	\caption{Test de raíz unitaria Dickey-Füller para diferentes series: Arriba:serie original (gtemp). Medio: residuos de la regresión(resid(reg1)). Abajo: primera diferencia de la serie original (diff(gtemp))}\label{fig5}
+\end{figure}
+%\end{frame}
+%
+%\end{section}
+%---------------------------------------------------------
+%---------------------Slide 19--------------------------
+%\begin{section}{Modelos ARIMA: modelando el corto plazo}
+%\begin{frame}
+%\frametitle{Modelos ARIMA: modelando el corto plazo}
+\section{Modelos ARIMA: modelando el corto plazo}
+
+En el a\~no 1970, la metodolog\'{\i}a propuesta por George Box y Gwilym Jenkins, \cite{BoxJenkins} , dos ingenieros con formaci\'on estad\'{\i}stica sistematizan modelos estad\'{\i}sticos para el an\'alisis de series temporales univariantes, teniendo en cuenta para esto la dependencia existente entre los datos. \\
+As\'{\i}, cada observaci\'on es modelada en funci\'on de los valores anteriores, la variable tiempo, por tanto, juega un papel fundamental. 
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 20--------------------------
+%\begin{frame}
+%\frametitle{Modelos ARIMA: modelando el corto plazo}
+
+
+Los modelos de predicci\'on de Box-Jenkins pertenecen a la familia de modelos alg\'ebraicos lineales, que consideran que una serie temporal real constituye una probable realizaci\'on de un determinado proceso estoc\'astico.\\
+\vspace{4mm}	
+Estos modelos se conocen con el nombre gen\'erico de ARIMA (Auto-regresive Integrated Moving Average), el cual deriva de sus tres componentes Autoregresivo (AR), Integrado (I) de Medias M\'oviles (MA). Modelar una serie temporal supone identificar un modelo ARIMA adecuado que se ajuste a la serie objeto de estudio, debe contener los m\'{\i}nimos elementos necesarios para describir el fen\'omeno y ser \'util para realizar previsiones.
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 21--------------------------
+%\begin{frame}
+%\frametitle{Sobre el operador de retroceso - backshift operator}
+\subsection{Sobre el operador de retroceso - backshift operator}
+\begin{mdframed}[style=MyFrame]
+\begin{definition}\label{def}
+	\textbf{Definici\'on: operador de retroceso (backshift operator):}
+		\begin{equation}
+		B x_t = x_{t-1} 
+		\end{equation}
+		\begin{equation}
+		B^2 x_t =  B(B x_t) = B x_{t-1} = x_{t-2}
+		\end{equation}
+		As\'{\i}:
+		\begin{equation}
+		B^k x_t = x_{t-k} 
+		\end{equation} 
+\end{definition}
+\end{mdframed}
+
+%\only<1|handout:1>{
+%	\begin{block}{Definici\'on: operador de retroceso (backshift operator) }
+%		Definimos el operador de retroceso (backshift operator) como:
+%		
+%		\begin{equation}
+%		B x_t = x_{t-1} 
+%		\end{equation}
+%		\begin{equation}
+%		B^2 x_t =  B(B x_t) = B x_{t-1} = x_{t-2}
+%		\end{equation}
+%		As\'{\i}:
+%		\begin{equation}
+%		B^k x_t = x_{t-k} 
+%		\end{equation}
+%	\end{block}
+%}
+
+De esta forma tenemos que la primera diferencia se puede definir en t\'erminos de lags, en otras palabras del operador de retroceso:
+\begin{equation}
+\triangle x_t = x_t - x_{t-1}= (1 - B) x_t 
+\end{equation}
+En general:
+\begin{equation}
+\triangle^d x_t = (1 - B)^d x_t 
+\end{equation}
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 22--------------------------
+%\begin{frame}
+%\frametitle{Modelos ARIMA: modelando el corto plazo}
+\begin{mdframed}[style=MyFrame]
+\begin{definition}\label{def2}
+	\textbf{Definici\'on:  $AR (p)$:}
+	Un modelo autorregresivo de orden p, frecuentemente abreviado como $AR(p)$, tiene la forma:
+	\begin{equation}
+	x_t = \phi_1 x_{t-1} +  \phi_2 x_{t-2} + \dots{} +  \phi_p x_{t-p} + \epsilon_t
+	\label{ar}
+	\end{equation}
+	donde $x_t$ es una serie estacionaria, y  $\phi_1$,  $\phi_2$,  \dots{} , $\phi_p$ son constantes. 
+	Si la media de $x_t$ es $\mu$, entonces podemos reemplazar $x_t-\mu$ en $\eqref{ar}$
+	\begin{equation}
+	x_t-\mu = \phi_1 (x_{t-1}-\mu) +  \phi_2 (x_{t-2}-\mu) + \dots{} +  \phi_p (x_{t-p}-\mu) + \epsilon_t
+	\end{equation}
+	\begin{equation}
+	x_t = \alpha + \phi_1 x_{t-1} +  \phi_2 x_{t-2} + \dots{} +  \phi_p x_{t-p} + \epsilon_t
+	\end{equation}
+	donde $\alpha = \mu(1-\phi_1-\phi_2\dots{}\phi_p)$\\
+	Usando los operadores de retroceso $AR(p)$ queda como:
+	\begin{equation}
+	(1- \phi_1 B + \phi_2 B^2 - \dots{}  - \phi_p B^p )
+	\end{equation}
+	o incluso m\'as concisamente
+	\begin{equation}
+	\phi (B) x_t = \epsilon_t
+	\end{equation}	
+\end{definition}
+\end{mdframed}
+
+%\only<1|handout:1>{
+%\begin{block}{Definici\'on: $AR (p)$}
+%	Un modelo autorregresivo de orden p, frecuentemente abreviado como $AR(p)$, tiene la forma:
+%	\begin{equation}
+%	x_t = \phi_1 x_{t-1} +  \phi_2 x_{t-2} + \dots{} +  \phi_p x_{t-p} + \epsilon_t
+%	\label{ar}
+%	\end{equation}
+%	donde $x_t$ es una serie estacionaria, y  $\phi_1$,  $\phi_2$,  \dots{} , $\phi_p$ son constantes. 
+%	Si la media de $x_t$ es $\mu$, entonces podemos reemplazar $x_t-\mu$ en $\eqref{ar}$
+%	\begin{equation}
+%	x_t-\mu = \phi_1 (x_{t-1}-\mu) +  \phi_2 (x_{t-2}-\mu) + \dots{} +  \phi_p (x_{t-p}-\mu) + \epsilon_t
+%	\end{equation}
+%	\begin{equation}
+%	x_t = \alpha + \phi_1 x_{t-1} +  \phi_2 x_{t-2} + \dots{} +  \phi_p x_{t-p} + \epsilon_t
+%	\end{equation}
+%	donde $\alpha = \mu(1-\phi_1-\phi_2\dots{}\phi_p)$\\
+%	Usando los operadores de retroceso $AR(p)$ queda como:
+%	\begin{equation}
+%	(1- \phi_1 B + \phi_2 B^2 - \dots{}  - \phi_p B^p )
+%	\end{equation}
+%	o incluso m\'as concisamente
+%	\begin{equation}
+%	\phi (B) x_t = \epsilon_t
+%	\end{equation}
+%\end{block}
+%}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 23--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo Proceso Autoregresivo de Orden 1: AR(1)}
+\subsection{Ejemplo Proceso Autoregresivo de Orden 1: AR(1)}
+
+En un procesos AR(1) la variable $x_t$ queda \'unicamente por su valor pasado $x_{t-1}$:
+\begin{equation}
+x_t = \phi x_{t-1} + \epsilon_t
+\end{equation}
+
+donde como sabemos $\epsilon_t$ es un proceso de ruido blanco con media cero y varianza constante $\sigma^2$, y $\phi$ es un par\'ametro. Para verificar que el modelo AR(1) es estacionario debemos probar que es:\\
+\vspace{4mm}	
+\textbf{(1) Estacionario en media}
+\begin{equation}
+E(x_t) = E(\phi x_{t-1} + \epsilon_t)=\phi E(x_{t-1} )
+\end{equation}
+Para que el proceso sea estacionario, la media debe ser constante y finita en el tiempo, lo que implica:
+\begin{equation}
+E(x_t) = \phi E(x_{t} )
+E(x_t) = \frac{0}{1-\phi}=0
+\end{equation}
+\\
+Por lo tanto, para que el proceso sea estacionario el par\'ametro $\phi \ne 0$.
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 24--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo Proceso Autoregresivo de Orden 1: AR(1)}
+
+\textbf{(2) Estacionario en covarianza}
+
+Para verificar que el modelo AR(1) sea estacionario, la varianza debe ser constante y finita en el tiempo:
+
+\begin{equation}
+\gamma = E(x_t-E(x_t))^2 = E(\phi x_{t-1} + \epsilon_t - 0)^2 = \phi^2 var(x_{t-1}) + \sigma^2
+\end{equation}
+
+Asumiendo que el proceso es estacionario:
+\begin{equation}
+E(x_t)^2 = var(x_{t-1}) = var(x_{t}) = \gamma
+\end{equation}
+De aqu\'{\i} tenemos que:
+
+\begin{equation}
+\gamma  = \phi^2 \gamma + \sigma^2
+\end{equation}
+
+Por lo que:
+\begin{equation}
+\gamma  = \frac{\sigma^2}{1-\phi^2}
+\end{equation}\\
+Para que un proceso sea estacionario, varianza constante y finita, es necesario que $|\phi|< 1$.
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 25--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo Proceso Autoregresivo de Orden 1: AR(1)}
+
+Si se cumple que $|\phi|< 1$, entonces podemos representar el modelo AR(1) como un proceso lineal dado por:
+
+\begin{equation}
+x_t = \sum_{j=0}^{\infty} \phi^j \epsilon_{t-j}
+\label{causal}
+\end{equation}
+
+La ecuaci\'on $\eqref{causal}$ se llama \textbf{soluci\'on estacionaria causal del modelo}. El t\'ermino causal se refiere al hecho de que $x_t$ no depende del futuro. De hecho, por simple sustituci\'on,\\
+\begin{equation}
+\underbrace{\sum_{j=0}^{\infty} \phi^j\epsilon_{t-j}}_{x_t} = \underbrace{\phi\left(\sum_{k=0}^{\infty} \phi^k\epsilon_{t-1-k}\right)}_{x_{t-1}}+\epsilon_t
+\end{equation}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 26 --------------------------
+%\begin{frame}
+%\frametitle{Simulaci\'on modelo AR(1) }
+\subsection{Simulaci\'on modelo AR(1)}
+
+%\only<1|handout:1>{
+%	\begin{exampleblock}{C\'odigo en R}
+%		par(mar=c(1,1,1,1))\\
+%		par(mfrow=c(2,1))\\
+%		plot(arima.sim(list(order=c(1,0,0), ar=.9), n=100), ylab=``x",\\
+%		main=(expression(AR(1)~~~phi==+.9)))\\
+%		plot(arima.sim(list(order=c(1,0,0), ar=-.9), n=100), ylab=``x",\\
+%		main=(expression(AR(1)~~~phi==-.9)))\\
+%	\end{exampleblock}
+%}
+\lstset{caption=Ejemplo ,framexleftmargin=5mm, frame=shadowbox, rulesepcolor=\color{green}}
+\begin{lstlisting}[title={‘Código R: Simulaci\'on modelo AR(1) ’},basicstyle=\ttfamily]{}
+par(mar=c(1,1,1,1))
+par(mfrow=c(2,1))
+plot(arima.sim(list(order=c(1,0,0), ar=.9), n=100), ylab="x",
+main=(expression(AR(1)~~~phi==+.9)))
+
+plot(arima.sim(list(order=c(1,0,0), ar=-.9), n=100), ylab="x",
+main=(expression(AR(1)~~~phi==-.9)))
+\end{lstlisting}
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 27 --------------------------
+%\begin{frame}
+%\frametitle{Simulaci\'on modelo AR(1) }
+
+\begin{figure}[h]
+	\centering
+	\textbf{Simulación AR(1)}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{ar.png}}
+	\caption{Simulaciones procesos AR(1): Arriba:$\phi=+0.9$.  Abajo: $\phi=-0.9$}\label{fig6}
+\end{figure}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 28--------------------------
+%\begin{frame}
+%\frametitle{Identificaci\'on modelo AR(1) }
+\subsection{Identificaci\'on modelo AR(1)}
+
+Para el caso de un proceso del tipo AR, el correlograma, representaci\'on gr\'afica de la funci\'on de autocorrelaci\'on, tendr\'a un
+comportamiento amortiguado hacia cero con todos los valores positivos, en caso de que $\theta > 0$, o bien alternando el signo, comenzando con negativo, si  $\theta < 0$.
+
+\begin{figure}[h]
+	\centering
+	\textbf{Proceso Autoregresivo: AR(1)}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{ar1corr.png}}
+	\caption{Autocorrelogramas para autocorrelación(acf) y autocorrelación parcial(pacf)}\label{fig7}
+\end{figure}
+
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 29--------------------------
+%\begin{frame}
+%\frametitle{Identificaci\'on modelo AR(1) }
+
+\begin{figure}[h]
+		\centering
+		\textbf{Proceso Autoregresivo: AR(1)}\par\medskip
+		\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{ar1corrb.png}}
+		\caption{Autocorrelogramas para autocorrelación(acf) y autocorrelación parcial(pacf)}\label{fig8}
+
+\end{figure}
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 30--------------------------
+%\begin{frame}
+%\frametitle{Modelos ARIMA: modelando el corto plazo}
+
+%\textbf{Media M\'ovil - MA (q)}
+\pagebreak
+\subsection{Media M\'ovil - MA (q)}
+
+Como una alternativa a la representaci\'on autorregresiva en la que se supone que el $x_t$ en el lado izquierdo de la ecuaci\'on se combina linealmente, el modelo de promedio m\'ovil de orden q, abreviado como $MA (q)$, asume que el ruido blanco $\epsilon_t$ usualmente a la mano derecha de la ecuaci\'on, se combinan linealmente para modelar los datos observados.
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 31--------------------------
+%\begin{frame}
+%\frametitle{Modelos ARIMA: modelando el corto plazo}
+%
+%\only<1|handout:1>{
+%	\begin{block}{Definici\'on: Media M\'ovil - $MA (q)$}
+%		
+%		\begin{equation}
+%		x_t = \epsilon_t + \theta_1 \epsilon_{t-1} +  \theta_2 \epsilon_{t-2} + \dots{} +  \theta_q \epsilon_{t-q} 
+%		\end{equation}
+%		
+%		donde hay $q$ rezagos de la media m\'ovil $\epsilon_t$ y $\theta_1$  + $ \theta_2$ + $\dots{}$ + $ \theta_q$ son par\'ametros. \\
+%		\vspace{4mm}	
+%		Aunque no es necesario, suponemos que $\epsilon_t$ es una serie de ruido blanco.
+%		
+%	\end{block}
+%}
+
+\begin{mdframed}[style=MyFrame]
+	\begin{definition}\label{def5}
+		\textbf{Definici\'on:  Media M\'ovil - $MA (q)$:}
+		\begin{equation}
+				x_t = \epsilon_t + \theta_1 \epsilon_{t-1} +  \theta_2 \epsilon_{t-2} + \dots{} +  \theta_q \epsilon_{t-q} 
+				\end{equation}
+				
+				donde hay $q$ rezagos de la media m\'ovil $\epsilon_t$ y $\theta_1$  + $ \theta_2$ + $\dots{}$ + $ \theta_q$ son par\'ametros. \\
+				\vspace{4mm}	
+				Aunque no es necesario, suponemos que $\epsilon_t$ es una serie de ruido blanco.
+	\end{definition}
+\end{mdframed}
+%\end{frame}
+
+
+%---------------------------------------------------------
+%---------------------Slide 32--------------------------
+%\begin{frame}
+%\frametitle{Modelos ARIMA: modelando el corto plazo}
+
+%\only<1|handout:1>{
+%\begin{block}{Definici\'on: Media M\'ovil - $MA (q)$}
+%	
+%%	Tambi\'en podemos escribir el proceso $MA (q)$ en la forma equivalente:
+%%	
+%%	\begin{equation}
+%%	x_t = \theta_t (B) \epsilon_{t} 
+%%	\end{equation}
+%%	
+%%	donde  $\theta_t$ es el operador de promedio m\'ovil definido como:
+%%	
+%%	\begin{equation}
+%%	\theta (B) = 1 + \theta_1B + \theta_2B^2 + \dots{} + \theta_q B^q
+%%	\end{equation}
+%%	\\
+%%	\vspace{4mm}	
+%%	A diferencia del proceso autorregresivo, el proceso de promedio m\'ovil es estacionario para cualquier valor de los par\'ametros $\theta_1$ + $\theta_2$ +$ \dots{}$ + $\theta_q$.
+%	
+%	
+%\end{block}
+%}
+\pagebreak
+\begin{mdframed}[style=MyFrame]
+	\begin{definition}\label{def6}
+		\textbf{Definici\'on:  Media M\'ovil - $MA (q)$:}
+			Tambi\'en podemos escribir el proceso $MA (q)$ en la forma equivalente:
+		
+		\begin{equation}
+		x_t = \theta_t (B) \epsilon_{t} 
+		\end{equation}
+		
+		donde  $\theta_t$ es el operador de promedio m\'ovil definido como:
+		
+		\begin{equation}
+		\theta (B) = 1 + \theta_1B + \theta_2B^2 + \dots{} + \theta_q B^q
+		\end{equation}
+		\\
+		\vspace{4mm}	
+		A diferencia del proceso autorregresivo, el proceso de promedio m\'ovil es estacionario para cualquier valor de los par\'ametros $\theta_1$ + $\theta_2$ +$ \dots{}$ + $\theta_q$.
+		
+	\end{definition}
+\end{mdframed}
+%\end{frame}
+
+
+%---------------------------------------------------------
+%---------------------Slide 33--------------------------
+%\begin{frame}
+%\frametitle{Modelos ARIMA: modelando el corto plazo}
+
+%\textbf{Interpretaci\'on del model de media m\'ovil - MA (q)}
+\subsubsection[1]{Interpretaci\'on del model de media m\'ovil - MA (q)}
+
+As\'{\i} como un modelo autorregresivo es intuitivamente sencillo de comprender, la formulaci\'on de un modelo de medias m\'oviles resulta frecuentemente no intuitivo. ?`Qu\'e significa que una variable aleatoria se explique en funci\'on de los errores cometidos en per\'{\i}odos anteriores?, ?`De d\'onde vienen esos errores?, ?`Cu\'al es la justificaci\'on de un modelo de este tipo?.
+En realidad, un modelo de medias m\'oviles puede obtenerse a partir de un modelo autorregresivo a partir de la realizaci\'on de sucesivas sustituciones.
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 34--------------------------
+%\begin{frame}
+%\frametitle{Modelos ARIMA: modelando el corto plazo}
+
+%\textbf{Interpretaci\'on del model de media m\'ovil - MA (q)}
+\subsubsection[2]{Interpretaci\'on del model de media m\'ovil - MA (q)}
+Supongamos un modelo $AR(1)$, sin t\'ermino independiente:
+
+\begin{equation}
+x_t =  \phi x_{t-1} + \epsilon_t
+\end{equation}
+
+si consideramos $t-1$ en lugar de $t$ el modelo ser\'{\i}a en este caso:
+
+\begin{equation}
+x_{t-1} =  \phi x_{t-2} + \epsilon_{t-1}
+\end{equation}
+
+sustituyendo:
+
+\begin{equation}
+x_t =  \phi^2 x_{t-2} + \phi \epsilon_{t-1} + \epsilon_t
+\end{equation}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 35--------------------------
+%\begin{frame}
+%\frametitle{Modelos ARIMA: modelando el corto plazo}
+%
+%\textbf{Interpretaci\'on del model de media m\'ovil - MA (q)}
+
+si ahora sustituimos $x_{t-2}$ por su expresi\'on autorregresiva y as\'{\i} sucesivamente llegamos a un modelo del tipo:
+
+\begin{equation}
+x_t = \epsilon_t + \theta \epsilon_{t-1} +  \theta^2 \epsilon_{t-2} + \dots{} +  \theta^q \epsilon_{t-q} 
+\end{equation}
+
+que es la expresi\'on, sin t\'ermino independiente, de un modelo de medias m\'oviles como el planteado anteriormente. En realidad, de forma estricta, el paso de un modelo a otro deber\'{\i}a realizarse al contrario, de un MA a un AR, utilizando el teorema general de descomposici\'on de Wold.
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 36 --------------------------
+%\begin{frame}
+%\frametitle{Simulaci\'on modelo MA(1) }
+
+%\only<1|handout:1>{
+%\begin{exampleblock}{C\'odigo en R}
+%par(mfrow = c(2,1))\\
+%plot(arima.sim(list(order=c(0,0,1), ma=.5), n=100), ylab=``x",\\
+%main=(expression(MA(1)~~~theta==+.5)))\\
+%plot(arima.sim(list(order=c(0,0,1), ma=-.5), n=100), ylab=``x",\\
+%main=(expression(MA(1)~~~theta==-.5)))\\
+%\end{exampleblock}
+%}
+\lstset{caption=Ejemplo Simulaci\'on modelo MA(1) ,framexleftmargin=5mm, frame=shadowbox, rulesepcolor=\color{green}}
+\begin{lstlisting}[title={‘Código R: ejemplo Simulaci\'on modelo MA(1) ’},basicstyle=\ttfamily]{}
+par(mfrow = c(2,1))
+plot(arima.sim(list(order=c(0,0,1), ma=.5), n=100), ylab="x",
+main=(expression(MA(1), theta==+.5)))
+plot(arima.sim(list(order=c(0,0,1), ma=-.5), n=100), ylab="x",
+main=(expression(MA(1), theta==-.5)))
+\end{lstlisting}
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 37--------------------------
+%\begin{frame}
+%\frametitle{Simulaci\'on modelo MA(1) }
+
+\begin{figure}[h]
+	\centering
+	\textbf{Ejemplo 1: Simulaci\'on modelo MA(1)}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{ma.png}}
+	\caption{Procesos de medias móviles. Arriba: parámetro $\theta=+0.5$. Abajo: parámetro $\theta=-0.5$}\label{fig9}
+\end{figure}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 38--------------------------
+%\begin{frame}
+%\frametitle{Identificaci\'on modelo MA }
+\pagebreak
+\subsubsection{Identificaci\'on modelo MA }
+Para la identificaci\'on de todos los componentes del modelo MA, tal como vimos para el modelo AR, se utiliza la funci\'on de autocorrelaci\'on (AFC) y la funci\'on de autocorrelaci\'on parcial (PAFC), y as\'{\i} se procede a la identificaci\'on de los componentes, en base a los gr\'aficos de los distintos modelos te\'oricos.
+
+\begin{figure}[h]
+	\centering
+	\textbf{Autocorrelograma de proceso de media móvil MA(1), $\theta=+0.5$}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[scale=0.3]{idMA1.png}}
+	\caption{Autocorrelogramas para diferentes retardos de proceso de media móvil con $\theta=+0.5$(lags). ACF(barras negras), PACF(barras blancas).}\label{fig10}
+\end{figure}
+
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 39--------------------------
+%\begin{frame}
+%\frametitle{Identificaci\'on modelo ARMA }
+\subsection{Identificaci\'on modelo ARMA}
+
+
+\begin{figure}[h]
+	\centering
+	\textbf{Autocorrelograma de proceso de media móvil MA(1), $\theta=-0.5$ }\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{idMA2.png}}
+	\caption{Autocorrelogramas para diferentes retardos de proceso de media móvil con $\theta=-0.5$(lags). ACF(barras negras), PACF(barras blancas).}\label{fig13}
+\end{figure}
+
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 40--------------------------
+%\begin{frame}
+%\frametitle{Modelos ARIMA: modelando el corto plazo}
+
+%\only<1|handout:1>{
+%\begin{block}{Definici\'on: Modelo ARMA - $ARMA (r,q)$}
+%
+%Una serie de tiempo $\{x_t, t = 0, \pm1, \pm2 , \dots{} \}$ es un proceso ARMA(p, q), si es estacionario y	
+%\begin{equation}
+%x_t =  \phi_1 x_{t-1} +  \phi_2 x_{t-2} + \dots{} +  \phi_p x_{t-p} + \epsilon_t + \theta_1 \epsilon_{t-1} +  \theta_2 \epsilon_{t-2} + \dots{} +  \theta_q \epsilon_{t-q} 
+%\end{equation}
+%
+%Los par\'ametros p y q se llaman \'ordenes autoregresivas y promedios m\'oviles, respectivamente. \\
+%\vspace{4mm}	
+%Si $x_t$ tiene una media distinta de cero $\mu$, establecemos que $\alpha = \mu (1-\theta_1, \dots{} -\theta_q)$ y podemos re-escribimos el modelo como:
+%
+%\begin{equation}
+%x_t = \alpha + \phi_1 x_{t-1} + \dots{} + \phi_p x_{t-p} + w_t +\theta_1  \epsilon_{t-1} + \dots{} + \theta_q  \epsilon_{t-q} .
+%\end{equation}
+%
+%\end{block}
+%}
+\pagebreak
+\begin{mdframed}[style=MyFrame]
+	\begin{definition}\label{def7}
+		\textbf{Definici\'on:  $Modelo ARMA - ARMA (r,q)$:}\\
+Una serie de tiempo $\{x_t, t = 0, \pm1, \pm2 , \dots{} \}$ es un proceso ARMA(p, q), si es estacionario y	
+\begin{equation}
+x_t =  \phi_1 x_{t-1} +  \phi_2 x_{t-2} + \dots{} +  \phi_p x_{t-p} + \epsilon_t + \theta_1 \epsilon_{t-1} +  \theta_2 \epsilon_{t-2} + \dots{} +  \theta_q \epsilon_{t-q} 
+\end{equation}
+
+Los par\'ametros p y q se llaman \'ordenes autoregresivas y promedios m\'oviles, respectivamente. \\
+\vspace{4mm}	
+Si $x_t$ tiene una media distinta de cero $\mu$, establecemos que $\alpha = \mu (1-\theta_1, \dots{} -\theta_q)$ y podemos re-escribimos el modelo como:
+
+\begin{equation}
+x_t = \alpha + \phi_1 x_{t-1} + \dots{} + \phi_p x_{t-p} + w_t +\theta_1  \epsilon_{t-1} + \dots{} + \theta_q  \epsilon_{t-q} .
+\end{equation}		
+	\end{definition}
+\end{mdframed}
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 41 --------------------------
+%\begin{frame}
+%\frametitle{Modelos ARIMA: modelando el corto plazo}
+
+%\textbf{Invertibilidad}
+\subsection{Invertibilidad}
+Una serie temporal es invertible si los errores se pueden invertir en una representaci\'on de observaciones pasadas. As\'{\i} por ejemplo, como ya vimos, el modelo AR es siempre invertible.
+En el caso del modelo ARMA, las ra\'{\i}ces de las siguientes ecuaciones deben ser analizadas para garantizar invertibilidad.
+
+\begin{equation}
+\phi (z) = 1 + \phi_1 z + \phi_2 z^2 + \dots{} + \phi_p z^p
+\end{equation}
+
+\begin{equation}
+\theta(z) =  1 + \theta_1 z + \theta_2 z^2 + \dots{} + \theta_q z^q
+\end{equation}
+
+En particular el modelo ARMA ser\'a invertible si y solo si $\theta(z) \ne 0$ para $|z| \le 1$
+En general, los valores propios son la soluci\'on del $det (A - \lambda I)$ = 0, vemos que este es casi el polinomio caracter\'{\i}stico de las ecuaciones que definimos arriba. Por lo tanto, vemos que los valores propios de A son el inverso de las ra\'{\i}ces del polinomio caracter\'{\i}stico, y esa convergencia de la iteraci\'on hacia atr\'as ocurre cuando las ra\'{\i}ces del polinomio caracter\'{\i}stico se encuentran fuera del c\'{\i}rculo unitario.
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 42 --------------------------
+%\begin{frame}
+%\frametitle{Modelos ARIMA: modelando el corto plazo}
+
+%\textbf{Estacionaridad e Invertibilidad}
+\subsection{Estacionaridad e Invertibilidad}
+Wold demostr\'o que todos los procesos estoc\'asticos estacionarios de covarianza podr\'{\i}an descomponerse como la suma de
+procesos determin\'{\i}sticos y linealmente indeterministas los cuales no estaban correlacionados con todos los rezagos; es decir,
+si $y_t$ es la covarianza estacionaria, entonces:
+
+\begin{equation}
+y_t = x_t + z_t
+\end{equation}
+
+donde $x_t$ es un proceso determinista estacionario en covarianza y $z_t$ es linealmente indeterminista,
+con $Cov (x_t, z_s) = 0$ para todas los $t$ y $s$. Este resultado proporciona una base te\'orica para la propuesta de Box y Jenkins  para modelar procesos estacionarios de covarianza escalar (desestacionalizados) como son los procesos ARMA.
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 43--------------------------
+%\begin{frame}
+%\frametitle{Modelos ARIMA: modelando el corto plazo}
+
+%\textbf{Modelos ARMA (p,q)}
+\subsection{Modelos ARMA (p,q)}
+
+Como se indic\'o anteriormente, cuando $q$ = 0, el modelo se denomina modelo autoregresivo de orden $p$, $AR (p)$, y cuando $p$ = 0, el modelo se denomina modelo de promedio m\'ovil de orden $q$, $MA (q)$. \\
+Es \'util escribir los modelos ARIMA usando el operador AR y el operador MA descritos anteriormente. En particular, el modelo $ARMA (p, q) $ puede escribirse entonces en forma concisa como:
+
+\begin{equation}
+\phi (B) x_t = \theta (B) \epsilon_t.
+\end{equation}
+%\textbf{Modelos ARIMA (p, i, q)}
+\subsection{Modelos ARIMA (p, i, q)}
+El modelo ARMA gana su I y se convierte en ARIMA cuando debe ser integrado para lograr estacionaridad. El \'{\i}ndice $I$ ser\'a entonces el numero de veces que debe ser diferenciado.
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 44--------------------------
+%\begin{frame}
+%\frametitle{Identificaci\'on modelo ARMA }
+\subsection{Identificaci\'on modelo ARMA}
+
+Para la identificaci\'on de todos los componentes del modelo ARMA se utiliza la funci\'on de autocorrelaci\'on (AFC) y la funci\'on de autocorrelaci\'on parcial (PAFC), y as\'{\i} se procede a la identificaci\'on de los componentes estacional y no estacional por separado, en base a los gr\'aficos de los distintos modelos te\'oricos.
+
+\begin{figure}[h!]
+	\centering
+	\textbf{Proceso autoregresivo de media móvil de orden (1,1): ARMA(1,1)}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{idARMA.png}}
+	\caption{Autocorrelogramas para diferentes retardos(lags) para un proceso ARMA(1,1)}\label{fig16}
+\end{figure}
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 45--------------------------
+%\begin{frame}
+%\frametitle{Identificaci\'on modelo ARMA }
+
+En resumen tendremos:
+
+\begin{figure}[h]
+	\centering
+	\textbf{En resumen tendremos:}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{resumenARMA.png}}
+	\caption{Tabla resumen de los modelos AR(p),MA(q) y ARMA(p,q), con sus respectivos resultados esperados para las funciones de autocorrelación(ACF) y autocorrelación parcial(PACF)}\label{fig14}
+\end{figure}
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 46--------------------------
+%\begin{frame}
+%\frametitle{Modelos SARIMA (p,q)}
+\subsection{Modelos SARIMA (p,q)}
+
+Los modelos ARIMA tambi\'en son capaces de modelar una amplia gama de datos estacionales. Los llamados  modelos SARIMA, Seasonal ARIMA models, se obtienen al incluir t\'erminos estacionales adicionales en los modelos ARIMA que hemos visto hasta ahora, de la siguiente manera:
+
+\begin{equation}
+ARIMA (p,d,q)(P,D,Q)m
+\end{equation}
+
+donde m = n\'umero de per\'{\i}odos por temporada. \\
+Usamos la notaci\'on en may\'usculas para las partes estacionales del modelo y la notaci\'on en min\'usculas para las partes no estacionales del modelo.\\
+La parte estacional del modelo consiste en t\'erminos que son muy similares a los componentes no estacionales del modelo, pero implican retrocesos del per\'{\i}odo estacional. \\
+
+%\end{frame}
+%\end{section}
+%---------------------------------------------------------
+%---------------------Slide 47--------------------------
+%\begin{section}{Evaluaci\'on estad\'{\i}stica de un Modelo ARIMA}
+%\begin{frame}
+%\frametitle{Evaluaci\'on estad\'{\i}stica de un Modelo ARIMA}
+\subsubsection[evaluación]{Evaluaci\'on estad\'{\i}stica de un Modelo ARIMA}
+Se debe evaluar:
+%\only<1->{
+\begin{itemize}
+\item[A] \textbf{Significancia estad\'{\i}stica de los par\'ametros} 
+Los coeficientes obtenidos en la estimaci\'on que no sean significativamente distintos de cero, a un nivel de significancia del $5\%$, no son necesarios, por lo que deben eliminarse.
+\item[B] \textbf{Estacionariedad e invertibilidad del modelo estimado.} Para valores de los coeficientes estimados pr\'oximos a la frontera de la no-estacionariedad, es conveniente llevar a cabo un test de ra\'{\i}ces unitarias.
+\item[C] \textbf{Estabilidad del modelo estimado.} Aunque los par\'ametros sean significativos, el modelo puede ser rechazado si existe una fuerte correlaci\'on entre los par\'ametros del modelo. Esto ocurre cuando el coeficiente de correlaci\'on tiene un valor absoluto superior a 0,7, entonces es conveniente probar con modelos alternativos.
+\end{itemize}
+%} 
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 48--------------------------
+%\begin{frame}
+%\frametitle{Sobre la Selecci\'on de Modelos}
+\subsection{Sobre la Selecci\'on de Modelos}
+
+Puede ocurrir que varios modelos describan satisfactoriamente la serie temporal, por lo que sea necesario seleccionar el modelo m\'as adecuado. Este proceso de selecci\'on puede ser sencillo o un poco m\'as complejo, por lo que es necesario recurrir a criterios de selecci\'on de modelos.\\
+%\par
+Los criterios m\'as comunes en la selecci\'on de modelos son el AIC (Akaike Information Criterion) y el BIC (Bayesian Information Criterion) que es una extensi\'on bayesiana del primero. 
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 49 --------------------------
+%\begin{frame}
+%\frametitle{Criterios de Informaci\'on}
+\subsubsection{Criterios de Informaci\'on}
+
+%\only<1|handout:1>{
+%\begin{block}{Definici\'on: Akaike Information Criterion}
+%\begin{equation*}
+%AIC = log \hat{\sigma_k^2} + \frac{n+2k}{n} 
+%\end{equation*}
+%\end{block}
+%}
+\begin{mdframed}[style=MyFrame]
+	\begin{definition}\label{def8}
+		\textbf{Definici\'on: Akaike Information Criterion}
+		\begin{equation*}
+		AIC = log \hat{\sigma_k^2} + \frac{n+2k}{n} 
+		\end{equation*}
+	\end{definition}
+\end{mdframed}
+\vspace{4mm}	
+Donde $\hat{\sigma_k^2} = \frac{SSE_k}{n}$, donde $k$ es el n\'umero de par\'ametros del modelo, $n$ el tama\~no de la muestra, y $SSE_k$ equivale a la suma de los residuos al cuadrado bajo el modelo $k$ ($SSE_k=\sum_{t=1}^{n}(x_t-\bar{x})^2$).\\
+%\par
+%\vspace{4mm}	
+El valor de $k$ que produce el m\'{\i}nimo AIC representa el mejor modelo. La idea es que minimizar $\hat{\sigma_k^2}$ representa un objetivo razonable, excepto que disminuye mon\'otonamente a medida que $k$ aumenta. Por lo tanto, debemos penalizar la varianza del error por un t\'ermino proporcional al n\'umero de par\'ametros.
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 50 --------------------------
+%\begin{frame}
+%\frametitle{Criterios de Informaci\'on}
+%
+%\only<1|handout:1>{
+%	\begin{block}{Definici\'on: Bias Corrected}
+%		\begin{equation*}
+%		AICc = log \hat{\sigma_k^2} + \frac{n+k}{n-k-2} 
+%		\end{equation*}
+%	\end{block}
+%}
+\begin{mdframed}[style=MyFrame]
+	\begin{definition}\label{def15}
+		\textbf{Definici\'on:  Bias Corrected}
+		\begin{equation*}
+				AICc = log \hat{\sigma_k^2} + \frac{n+k}{n-k-2} 
+		\end{equation*}
+	\end{definition}
+\end{mdframed}
+
+%\only<1|handout:1>{
+%	\begin{block}{Definici\'on: Bayesian Information Criterion - BIC}
+%		\begin{equation*}
+%		AICc = log \hat{\sigma_k^2} + \frac{k log n}{n} 
+%		\end{equation*}
+%	\end{block}
+%}
+\begin{mdframed}[style=MyFrame]
+	\begin{definition}\label{def16}
+		\textbf{Definici\'on:  Bayesian Information Criterion - BIC}
+		\begin{equation*}
+		AICc = log \hat{\sigma_k^2} + \frac{k log n}{n} 
+		\end{equation*}		
+	\end{definition}
+\end{mdframed}
+BIC tambi\'en se conoce como el \textbf{Schwarz Information Criterion (SIC)}. Varios estudios de simulaci\'on han verificado que BIC es adecuado para obtener el orden correcto en muestras grandes, mientras que AICc tiende a ser superior en muestras m\'as peque\~nas donde el n\'umero relativo de par\'ametros es grande.
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 51--------------------------
+%\begin{frame}
+%\frametitle{Sobre la Selecci\'on de Modelos}
+
+\pagebreak En \'ultimo t\'ermino un modelo es mejor que otro si su predicci\'on es mejor. Por otro lado, diremos que \textbf{una predicci\'on, es mejor que otra, cuando comete un menor error extra-muestral.}\\
+%\par
+As\'{\i}, la precisi\'on de los m\'etodos utilizados para pronosticar se pueden medir por ejemplo a trav\'es de la funci\'on de p\'erdida: \textbf{Error cuadr\'atico medio - Mean Square Error (MSE)}, con el fin de comprender qu\'e modelo proporciona un mejor pron\'ostico extra-muestral sobre otro. Esto es:
+
+\begin{equation}
+\textbf{MSE}=\frac{1}{T} \sum_{t=1}^T (x_t-\hat{x}_t)^2
+\label{MSE}
+\end{equation}
+
+donde $x_t$ corresponde al valor real de la serie en el tiempo $t$ y $\hat{x}_{t}$ corresponde al valor pronosticado por el modelo propuesto en el mismo instante.
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 52--------------------------
+%\begin{frame}
+%\frametitle{Sobre la Selecci\'on de Modelos}
+
+Otros criterios de selecci\'on de modelos que consideran el error extra-muestral son: 
+\begin{itemize}
+	\item i) el \textbf{Error Absoluto Medio (EAM) - mean absolute deviation (MAD)},
+	\begin{equation}
+	\textbf{MAD}=\frac{1}{T} \sum_{t=1}^T |x_t-\hat{x}_t|
+	\label{MAD}
+	\end{equation} y 
+	\item ii) \textbf{Error Absoluto Porcentual Medio (EAPM) - mean absolute percentage error (MAPE)}
+	\begin{equation}
+	\textbf{MAPE}=\frac{1}{T} \sum_{t=1}^T \left| 1 - \frac{x_t}{\hat{x}_t}\right|
+	\label{MAPE}
+	\end{equation}
+	 
+\end{itemize}
+
+%\begin{equation}
+%\textbf{MAD}=\frac{1}{T} \sum_{t=1}^T |x_t-\hat{x}_t|
+%\label{MAD}
+%\end{equation}
+
+%\begin{equation}
+%\textbf{MAPE}=\frac{1}{T} \sum_{t=1}^T \left| 1 - \frac{x_t}{\hat{x}_t}\right|
+%\label{MAPE}
+%\end{equation}
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 53 --------------------------
+%\begin{frame}
+%\frametitle{Ejemplo IPC en Chile}
+\subsection{Ejemplo IPC en Chile}
+Considerando data mensual del IPC desde enero del 2013 a la fecha en Chile, obtenida de la p\'agina del Banco Central, intetnaremos predecir el IPC (serie original).
+%\only<1|handout:1>{
+%\begin{exampleblock}{C\'odigo en R}
+%rm(list=ls())\\
+%data$<-$read.csv (``ipc.csv")\\
+%ipc $<-$ ts(data[,2],start = c(2013,1), end=c(2018, 6), frequency = 12)\\
+%plot.ts(ipc, xlab='Years', ylab = ``Indice de Precios al Comsumidor')\\
+%
+%\end{exampleblock}
+%}
+\lstset{caption=Ejemplo IPC en Chile ,framexleftmargin=5mm, frame=shadowbox, rulesepcolor=\color{green}}
+\begin{lstlisting}[title={‘Código R: Ejemplo IPC en Chile’},basicstyle=\ttfamily]{}
+rm(list=ls())
+data<-read.csv ("ipc.csv")
+ipc <- ts(data[,2],start = c(2013,1), end=c(2018, 6),
+		frequency = 12)
+plot.ts(ipc,xlab='Years',ylab='Indice de Precios al Comsumidor')
+\end{lstlisting}
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 54--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo IPC en Chile}
+
+\begin{figure}[h]
+	\centering
+	\textbf{Ejemplo IPC en Chile.}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{ipc.pdf}}
+	\caption{Serie de tiempo del índice de precios al consumidor (IPC) en Chile.}\label{fig18}
+\end{figure}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 55 --------------------------
+%\begin{frame}
+%\frametitle{Ejemplo IPC en Chile}
+\pagebreak
+\subsubsection{Encontrando el orden del modelo. Tendencia, estacionaridad, autocorrelaci\'on.}
+%\only<1|handout:1>{
+%\begin{exampleblock}{C\'odigo en R}
+%
+%$\#$ Descomposici\'on\\
+%fit $<-$ stl(ipc, s.window=``period")\\
+%plot(fit)\\
+%
+%$\#$ Test de ra\'{\i}z unitaria\\
+%adf.test(ipc)\\
+%adf.test(diff(ipc))\\
+%
+%$\#$ Funci\'on de autocorrelaci\'on (AFC) y autocorrelaci\'on parcial (PAFC)\\
+%acf(diff(ipc),lag=36,lwd=3)\\
+%pacf(diff(ipc),lag=36,lwd=3)\\
+%\end{exampleblock}
+%}
+\lstset{caption=Ejemplo ,framexleftmargin=5mm, frame=shadowbox, rulesepcolor=\color{green}}
+\begin{lstlisting}[title={‘Código R: Tendencia, estacionaridad, autocorrelación. ’},basicstyle=\ttfamily]{}
+#Descomposicion
+fit <- stl(ipc, s.window="period")
+plot(fit)
+library("tseries")
+#TestRaizUnitaria
+adf.test(ipc)
+adf.test(diff(ipc))
+#FuncionAutocorrelacion_yAutocorrelacionParcial
+acf(diff(ipc),lag=36,lwd=3)
+pacf(diff(ipc),lag=36,lwd=3)
+\end{lstlisting}
+
+%\end{frame}
+%---------------------------------------------------------
+%---------------------Slide 56--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo IPC en Chile}
+
+%\textbf{Descomposici\'on\ de la serie}\\
+\subsection{Descomposici\'on\ de la serie}
+
+\begin{figure}[h]
+	\centering
+	\textbf{Ejemplo IPC: Descomposición de la serie de IPC}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{ipcdecomp.png}}
+	\caption{Diferentes componentes de la serie: data: serie original de IPC; seasonal: componente estacional; trend: tendencia de la serie; remainder: componentes irregulares.}\label{fig20}
+\end{figure}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 57--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo IPC en Chile}
+
+%\textbf{Test de ra\'{\i}z unitaria}\\
+%\vspace{4mm}	
+%Augmented Dickey-Fuller Test\\
+%data:  ipc\\
+%Dickey-Fuller = -0.11148, Lag order = 4, p-value =0.99\\
+%alternative hypothesis: stationary\\
+%\vspace{4mm}	
+%Augmented Dickey-Fuller Test\\
+%data:  diff(ipc)\\
+%Dickey-Fuller = -5.8024, Lag order = 3, p-value = 0.01\\
+%alternative hypothesis: stationary\\
+\begin{figure}[h]
+	\centering
+	\textbf{Test de ra\'{\i}z unitaria}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{testRaizUnitIPCChile.png}}
+	\caption{Test de Augmented Dickey-Füller sobre data original(ipc) y sobre primera diferencia de la data de ipc(diff(ipc))}\label{fig21}
+\end{figure}
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 58--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo IPC en Chile}
+%
+%\textbf{Funci\'on de autocorrelaci\'on (AFC) y autocorrelaci\'on parcial (PAFC)}\\
+\begin{figure}[h]
+	\centering
+	\textbf{Funci\'on de autocorrelaci\'on (AFC) y autocorrelaci\'on parcial (PAFC)}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{acfpacdiffipc.pdf}}
+	\caption{Izquierda: autocorrelacion de serie de ipc diferenciada. Derecha: autocorrelación parcial de serie de IPC diferenciada.}\label{fig22}
+\end{figure}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 59--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo IPC en Chile}
+
+%\textbf{Pron\'ostico.}\\
+%\vspace{4mm}	
+%\only<1|handout:1>{
+%\begin{exampleblock}{C\'odigo en R}
+%
+%train.series =ipc $\left [ 1:44 \right ]$\\
+%test.series = ipc $\left [ 45:62 \right ]$\\
+%arima.model=arima(train.series, order=c(0,1,1))\\
+%forecast=predict(arima.model, length(test.series)\\
+%
+%mse $<-$sum((forecast$\$$pred-test.series)$\wedge2$)/length(test.series)\\
+%mad $<-$ sum(abs(forecast$\$$pred-test.series))/length(test.series)\\
+%mape $<-$ sum(abs( 1 - forecast$\$$pred/test.series))/length(test.series)\\
+%
+%fit $<-$ auto.arima(ipc)\\
+%summary(fit)\\
+%plot(fit)\\
+%mape $<-$ sum(abs(1 - test.series/f$[[``mean"]])$)/length(test.series)\\
+%accuracy(fit)\\
+%\end{exampleblock}
+%}
+\lstset{caption=Ejemplo ,framexleftmargin=5mm, frame=shadowbox, rulesepcolor=\color{green}}
+\begin{lstlisting}[title={‘Código R: REVISAR: Diapo 59(125)’},basicstyle=\ttfamily]{}
+train_series=ipc[1:44]
+test_series=ipc[45:62]
+arimaModel=arima(train_series, order=c(0,1,1))
+forecast=predict(arimaModel, length(test_series))
+mse <- sum((forecast$pred-test_series)^2)/length(test_series)
+mad <- sum(abs(forecast$pred-test_series))/length(test_series)
+mape <- sum(abs(1-test_series/forecast$pred))/length(test_series)
+fit <- auto.arima(ipc)
+summary(fit)
+plot(fit)
+
+mape <- 100*sum(abs(1-test_series/f[["mean"]]))/length(test_series)
+accuracy(fit)
+\end{lstlisting}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 60--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo IPC en Chile}
+%\textbf{output ARIMA (0, 1, 1) }\\
+%\vspace{4mm}	
+%Call:\\
+%arima(x = train.series, order = c(0, 1, 1))\\
+%
+%Coefficients:\\
+%\hspace{3em}ma1\\
+%\hspace{2.5em}$0.8205$\\
+%s.e.\hspace{1em}$ 0.0906$\\
+%
+%$\sigma^2$ estimated as $0.1029:  log likelihood = -12.68,  aic = 29.37$\\
+%\vspace{4mm}
+%\textbf{forecast ARIMA (0, 1, 1) }\\
+%mse
+%[1] 69.80031
+%\end{frame}
+\begin{figure}[h]
+	\centering
+	\textbf{Resultado-Parámetros ajuste de modelo ARIMA(0,1,1) y Error de Forecast(MSE)}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{resultadoArimaD60.png}}
+	\caption{Resultados del ajuste del modelo ARIMA(0,1,1) y su error de pronóstico}\label{fig24}
+\end{figure}
+%---------------------------------------------------------
+%---------------------Slide 61--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo IPC en Chile}
+%\textbf{Pron\'ostico - output ARIMA (0, 1, 1) }\\
+%\vspace{4mm}	
+%$\$$pred\\
+%Time Series:\\
+%Start = 45 \\
+%End = 54 \\
+%Frequency = 1 \\
+%$\left [ 1 \right ]$ $113.6141$ $113.6253$ $113.6292$ $113.6307$ $113.6311$ $113.6313$\\
+%$\left [ 7 \right ]$ $113.6314$ $113.6314$ $113.6314$ $113.6314$\\
+%
+%$\$$se\\
+%Time Series:\\
+%Start = 45 \\
+%End = 54 \\
+%Frequency = 1 \\
+%$\left [ 1 \right ]$ $0.3128668$ $0.6841962$ $0.9882296$ $1.2406559$ $1.4565974$\\
+%$\left [ 6 \right ]$ $1.6465783$ $1.8174943$ $1.9738906$ $2.1188485$ $2.2545301$\\
+%
+%\end{frame}
+\begin{figure}[h]
+	\centering
+	\textbf{Pronósticos de modelo ARIMA(0,1,1)}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{pronosticoD61.png}}
+	\caption{Pronóstico ARIMA(0,1,1)}\label{fig25}
+\end{figure}
+%---------------------------------------------------------
+%---------------------Slide 62--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo IPC en Chile}
+%\textbf{output auto.arima}\\
+%
+%Series: ipc \\
+%ARIMA(0,1,1)(0,0,1)[12] with drift \\
+%\vspace{2mm}	
+%Coefficients:\\
+%\hspace{5em}ma1\hspace{3em}sma1\hspace{3em}drift\\
+%\hspace{5em}$0.2329$\hspace{2em}$0.2483$\hspace{2em}$0.2909$\\
+%s.e.\hspace{3.5em}$0.1443$\hspace{2em}$0.1396$\hspace{2em}$0.0500$\\
+%\vspace{2mm}	
+%$\sigma^2$ estimated as $0.07771:  log likelihood=-8.01$\\
+%$AIC=24.02$  $ ICc=24.69$  $BIC=32.72$\\
+%\vspace{2mm}	
+%Training set error measures:\\
+%\hspace{7em}ME\hspace{2em}RMSE\hspace{3em}MAE\hspace{2em}MPE\\
+%Training set $0.00467571$ $0.2701877$ $0.2012356$ $0.005434612$\\
+%\hspace{7em}MAPE\hspace{2em}MASE\hspace{2em}ACF1\\
+%Training set $0.185618$ $0.05414794$ $-0.03368001$\\
+\begin{figure}[h]
+	\centering
+	\textbf{Pronósticos de modelo AutoARIMA}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{pronosticoAutoarimaD62.png}}
+	\caption{Pronóstico auto ARIMA}\label{fig26}
+\end{figure}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 63--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo IPC en Chile}
+%\textbf{Inverse MA roots  - auto.arima}\\
+\vspace{4mm}	
+\begin{figure}[h]
+	\centering
+	\textbf{Inverse MA roots - auto.arima}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{maroots.png}}
+	\caption{Soluciones de ecuación característica - Representación de circulo unitario}\label{fig}
+\end{figure}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 64--------------------------
+%\begin{frame}
+%\frametitle{Ejemplo IPC en Chile}
+%\textbf{Pron\'ostico auto.arima}\\
+\vspace{4mm}	
+\begin{figure}[h]
+	\centering
+	\textbf{Forecasts from ARIMA(0,1,1)(0,0,1)[12] with drift}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{forecastipc.png}}
+	\caption{Ejemplo IPC en Chile: Forecast de modelo auto.arima}\label{fig27}
+\end{figure}
+
+%\end{frame}
+%\end{section}
+%---------------------------------------------------------
+%---------------------Slide 65--------------------------
+%\begin{section}{Metodolog\'{\i}a de Estimaci\'on de un Modelo ARIMA}
+%\begin{frame}
+\section{Metodolog\'{\i}a de Estimaci\'on de un Modelo ARIMA}
+%\frametitle{Etapas de Estimaci\'on de un Modelo ARIMA}
+\subsection{Etapas de Estimaci\'on de un Modelo ARIMA}
+
+%\only<1->{
+\begin{itemize}
+\item[1] \textbf{Recolecci\'on de datos}: Es recomendable disponer de a lo menos 50 datos, y en el caso de series mensuales, es conveniente trabajar con entre seis y diez a\~nos de datos.
+\item[2] \textbf{Representaci\'on gr\'afica de la serie}: Resulta de gran utilidad disponer de diversos gr\'aficos de la serie y sus transfromaciones para decidir sobre la estacionariedad de la misma.
+\item[3] \textbf{Transformaci\'on de la serie}: La transformaci\'on de la serie es muchas veces necesaria en caso de encontrarnos con no-estacionaridad.
+\item[4] \textbf{Eliminaci\'on de la tendencia}: Al comprobarse gr\'aficamente la existencia de una tendencia, esta debe ser eliminada usando como vimos primeras diferencias, e incluso dos diferencias para una tendencia no lineal.
+\item[5] \textbf{Identificaci\'on del modelo}: Se debe determinar el tipo de modelo m\'as adecuado, es decir, el orden de los procesos autorregresivos y de medias m\'oviles de las componentes regular y estacional. Se suelen seleccionar varios modelos alternativos, estimarlos, y contrastarlos, antes de modelar definitivamente la serie.
+\item[6] \textbf{Estimaci\'on de los coeficientes del modelo}: A partir del modelo elegido se procede a la estimaci\'on de sus par\'ametros.
+\item[7] \textbf{Contraste de validez conjunta del modelo}: Se utilizan los diversos criterios y procedimientos vistos anteriormente para valorar el modelo o modelos seleccionados: test de significancia de par\'ametros, criterios de informaci\'on, covarianzas entre estimadores, coeficiente de correlaci\'on, $R^2$, i.e. suma de cuadrados de errores, etc.
+\item[8] \textbf{An\'alisis detallado de los errores}: Los errores extra-muestrales del modelo son determinantes para una valoraci\'on final del modelo. Las diferencias entre valores reales y estimados por el modelo son determinantes para una evaluaci\'on final del modelo.
+\item[9] \textbf{Selecci\'on del modelo}: Analizando los resultados de las fases anteriores se decidir\'a sobre el modelo adoptado. Si ninguno de los modelos estudiados nos proporciona resultados suficientemente satisfactorios se vuelve a la etapa 3, revisando todas las decisiones adoptadas.
+\item[10] \textbf{Predicci\'on}: Se tomar\'a el modelo v\'alido como f\'ormula inicial de predicci\'on. Ser\'a necesario comparar las predicciones con los valores ya conocidos y, posteriormente, analizar los errores extramuestrales.
+\end{itemize}
+%}
+%
+%
+%\end{frame}
+
+
+%---------------------------------------------------------
+%---------------------Slide 66--------------------------
+%\begin{frame}
+%\frametitle{Etapas de Estimaci\'on de un Modelo ARIMA}
+%
+%\only<1->{
+%\begin{itemize}
+%\item[5] \textbf{Identificaci\'on del modelo}: Se debe determinar el tipo de modelo m\'as adecuado, es decir, el orden de los procesos autorregresivos y de medias m\'oviles de las componentes regular y estacional. Se suelen seleccionar varios modelos alternativos, estimarlos, y contrastarlos, antes de modelar definitivamente la serie.
+%\item[6] \textbf{Estimaci\'on de los coeficientes del modelo}: A partir del modelo elegido se procede a la estimaci\'on de sus par\'ametros.
+%\item[7] \textbf{Contraste de validez conjunta del modelo}: Se utilizan los diversos criterios y procedimientos vistos anteriormente para valorar el modelo o modelos seleccionados: test de significancia de par\'ametros, criterios de informaci\'on, covarianzas entre estimadores, coeficiente de correlaci\'on, $R^2$, i.e. suma de cuadrados de errores, etc.
+%\end{itemize}
+%}
+
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 67--------------------------
+%\begin{frame}
+%\frametitle{Etapas de Estimaci\'on de un Modelo ARIMA}
+%
+%\only<1->{
+%\begin{itemize}
+%\item[8] \textbf{An\'alisis detallado de los errores}: Los errores extra-muestrales del modelo son determinantes para una valoraci\'on final del modelo. Las diferencias entre valores reales y estimados por el modelo son determinantes para una evaluaci\'on final del modelo.
+%\item[9] \textbf{Selecci\'on del modelo}: Analizando los resultados de las fases anteriores se decidir\'a sobre el modelo adoptado. Si ninguno de los modelos estudiados nos proporciona resultados suficientemente satisfactorios se vuelve a la etapa 3, revisando todas las decisiones adoptadas.
+%\item[10] \textbf{Predicci\'on}: Se tomar\'a el modelo v\'alido como f\'ormula inicial de predicci\'on. Ser\'a necesario comparar las predicciones con los valores ya conocidos y, posteriormente, analizar los errores extramuestrales.
+%\end{itemize}
+%}
+%
+%\end{frame}
+
+%---------------------------------------------------------
+%---------------------Slide 68--------------------------
+%\begin{frame}
+%\frametitle{Resumen de los pasos de Box-Jenkins}
+\section{Resumen de los pasos de Box-Jenkins}
+
+\begin{figure}[h]
+	\centering
+	\textbf{Resumen de los pasos de Box-Jenkins}\par\medskip
+	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{box_jenkins.png}}
+	\caption{Metodología de Box-Jenkins}\label{fig30}
+\end{figure}
+
+%\end{frame}
+%
+%\end{section}
+
+%---------------------------------------------------------
+%---------------------Slide 69--------------------------
+
+%\begin{section}{Tarea 2}
+%\begin{frame}
+%\frametitle{Tarea 2}
+\pagebreak\section{Tarea 2}
+\begin{mdframed}[style=MyFrame]
+Calibrar y evaluar los siguientes modelos para el precio de un commodity (0 activo en \'ultimo caso) a su eleci\'on:\\
+\textbf{1.} Camino aleatorio sin drift.,\\
+\textbf{2.} Camino aleatorio con drift.\\
+\textbf{3.} Promedio de los \'ultimos 5 a\~nos.\\ 
+\textbf{4.} Promedio de los \'ultimos 10 a\~nos.\\
+\textbf{5.} ARIMA(1,1,0).\\
+\textbf{6.} ARIMA(0,1,1).,\\ 
+\textbf{7.} ARIMA(1,1,1).,\\ 
+\textbf{8.} AR(1).,\\ 
+\textbf{9.} AR(2).,\\
+\textbf{10.} AR(3).\\
+\textbf{11.} $\alpha$ constante, $\psi$ = 1 y $\delta$ sigue un camino aleatorio.\\
+\textbf{12.} $\psi$=1,$\delta$=0 y ?sigue un camino aleatorio.\\
+\textbf{13.} $\alpha$ constante, $\delta$ y $\psi$ siguen caminos aleatorios con innovaciones independientes.\\
+\textbf{14.} $\delta$ = 0, $\alpha$ y $\psi$ siguen caminos aleatorios con innovaciones independientes.\\ 
+\textbf{15.} $\alpha$ constante, $\delta$ = 0 y $\psi$ sigue un camino aleatorio.\\
+\textbf{16.} $\alpha$, $\delta$ y $\psi$ siguen caminos aleatorios con innovaciones independientes.\\
+\textbf{17.} $\alpha$ constante, $\delta$ = 0 y $\psi$ sigue un AR(1).\\
+\textbf{18.} $\alpha$ y $\delta$ constantes, $\psi$ sigue un AR(1).\\
+\vspace{4mm}	
+Basarse en paper anexo.
+\end{mdframed}
+%\end{frame}
+%\end{section}
+
+
+
+
+
+
+\curinstructor{Marcelo Villena Chamorro PhD.}
