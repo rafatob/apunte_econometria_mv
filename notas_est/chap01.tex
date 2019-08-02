@@ -31,7 +31,7 @@ En el an\'alisis espectral, la partici\'on de los diversos tipos de variaci\'on 
 %\begin{frame}
 \subsection{Ejemplo 1: Cambio climático}Nuestro primer ejemplo de serie de tiempo es la temperatura de la tierra. Observamos una aparente tendencia ascendente en la serie durante la \'ultima parte del siglo XX, la que se ha utilizado como argumento para la hip\'otesis del calentamiento global. N\'otese tambi\'en la tendencia ascendente y bastante pronunciada alrededor de 1970. La cuesti\'on de inter\'es para los defensores del calentamiento global y los oponentes es si la tendencia general es natural, o si por el contrario es causada por el ser humano.
 
-\begin{figure}[h]{}
+\begin{figure}[H]{}
 	\centering
 	\textbf{Ejemplo 1: Cambio climático}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{gtemp.pdf}}
@@ -114,7 +114,7 @@ summary (Dlnprecio)
 %\frametitle{Ejemplo 2: Series temporales financieras}
 %\textbf{Indice Bolsa de Nueva York}
 %\end{frame}
-\begin{figure}[h]{}
+\begin{figure}[H]{}
 \centering
 \textbf{Ejemplo 2: Series temporales financieras}\par\medskip
 \fcolorbox{green}{blue}{
@@ -127,7 +127,7 @@ summary (Dlnprecio)
 %\begin{frame}
 %\frametitle{Ejemplo 2: Series temporales financieras}
 Los precios al parecer no son normales, aparentemente son log-normales.\\
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Ejemplo 2: Histograma de los Precios}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{hist_precio_sp.pdf}}
@@ -141,7 +141,7 @@ Los precios al parecer no son normales, aparentemente son log-normales.\\
 %\frametitle{Ejemplo 2: Series temporales financieras}
 \pagebreak
 Los retornos de los precios si parecen normales~\ref{figura4}, lo cual constituye una propiedad deseable para el an\'alisis estad\'\i{}stico.\\
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Ejemplo 2: Histograma de los Precios}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{hist_dlnprecio_sp.pdf}}
@@ -154,7 +154,7 @@ Los retornos de los precios si parecen normales~\ref{figura4}, lo cual constituy
 %---------------------Slide 15 --------------------------
 %\begin{frame}
 %\frametitle{Ejemplo 2: Series temporales financieras}
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Ejemplo 2: Histograma de los Precios}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{normal_hist_Dlnprice_sp.pdf}}
@@ -253,7 +253,7 @@ w = rnorm(200,0,1)
 plot.ts(w, ylim=c(-3,3), main="White Noise")
 \end{lstlisting}\label{codigoRuidoBlanco}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Ruido blanco - White Noise}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{white_noise.pdf}}
@@ -322,7 +322,7 @@ lines(0.2*(1:200), lty="dashed")
 %\begin{frame}
 %\frametitle{Caminata Aleatoria - Random Walk}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Caminata aleatoria}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{random_walk.pdf}}
@@ -364,7 +364,7 @@ par(mfrow=c(2,1))
 plot.ts(w, main="white noise")
 plot.ts(v, main="moving average")
 \end{lstlisting}\label{movingAverage}
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Medias móviles}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{moving_average.pdf}}
@@ -409,7 +409,7 @@ w = rnorm(550,0,1) ;
 x = filter(w, filter=c(1,-.9), method="recursive")[-(1:50)]
 plot.ts(x, main= "autoregression")
 \end{lstlisting}\label{autoregression}
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Autorregresiones}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{autoregression.pdf}}
@@ -467,7 +467,7 @@ plot.ts(s + t + i)
 %---------------------Slide 31 --------------------------
 %\begin{frame}
 %\frametitle{Descomposici\'on de las series de tiempo}
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Componentes de uuna Serie de Tiempo}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{time_series.pdf}}
@@ -1165,7 +1165,7 @@ $SE(\hat{\beta_j})$= error est\'andar de el par\'ametro estimado
 \subsection{Ejemplo 3: Regresiones}
 Como un nuevo ejemplo, calculamos el beta de un activo financiero. El beta es una medida de riesgo sistem\'atico, el cual se mide con respecto a la relaci\'on de los retornos del activo, con los del \'\i{}ndice diversificado del mercado, en este caso el \'\i{}ndice S$\&$P ya estudiado. En este caso calculamos el beta de otro \'\i{}ndice, el Russell 2000 (se denota por RUT) que mide el devenir de las empresas con small cap. 
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Regresiones}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{reg1.pdf}}
@@ -1210,7 +1210,7 @@ summary(reg1)
 %\begin{frame}
 %\frametitle{Ejemplo 3: Regresioness}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Russell explicado por SP500}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{graph_precios.pdf}}
@@ -1250,7 +1250,7 @@ qqline(residuos)
 
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Homocedasticidad}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{homocedasticidadD64.png}}
@@ -1267,7 +1267,7 @@ qqline(residuos)
 
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Normalidad de los residuos}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{qqplot_reg1.pdf}}

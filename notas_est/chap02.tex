@@ -43,7 +43,7 @@ abline(reg)
 %\begin{frame}
 %\frametitle{Ejemplo de repaso clase anterior\newline
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
 	\textbf{Ejemplo 1: Detrending global temperature}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth,scale=0.5]{gtemp_graph.pdf}}
@@ -57,7 +57,7 @@ abline(reg)
 %\frametitle{Ejemplo de repaso clase anterior\newline
 %	Detrending global temperature}
 
-\begin{figure}[p]
+\begin{figure}[H]
 	\centering
 	\textbf{Detrending global temperature}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth,scale=0.5]{reg_ej1.png}}
@@ -93,7 +93,7 @@ plot(diff(gtemp), type="o", main="first difference")
 %\frametitle{Ejemplo de repaso clase anterior\newline
 %	Detrending global temperature}
 
-\begin{figure}[p]
+\begin{figure}[H]
 	\centering
 	\textbf{Ejemplo 1: Detrending global temperature}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth,scale=0.5]{detrended.pdf}}
@@ -138,7 +138,7 @@ acf(diff(gtemp), 48, main="first difference")
 %\frametitle{Ejemplo de repaso clase anterior\newline
 %Detrending global temperature}
 
-\begin{figure}[p]
+\begin{figure}[H]
 	\centering
 	\textbf{Ejemplo 1: Autocorrelograma}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth,scale=0.5]{acf_example1.pdf}}
@@ -150,7 +150,7 @@ acf(diff(gtemp), 48, main="first difference")
 %---------------------Slide 11--------------------------
 %\begin{frame}
 %\frametitle{Sobre la descomposici\'on de una serie}
-\section{Sobre la descomposici\'on de una serie}
+\pagebreak\section{Sobre la descomposici\'on de una serie}
 
 En los gr\'aficos podemos apreciar que la primera diferencia de la serie produce resultados diferentes a la eliminaci\'on de la tendencia mediante la regresi\'on de la tendencia.\\
 En el caso de los gr\'aficos ACF, el proceso diferenciado muestra una autocorrelaci\'on mi\'{\i}nima, lo que puede implicar que la serie de temperatura global es similar una caminata aleatoria con deriva.\\
@@ -187,7 +187,7 @@ En EE.UU. el procedimiento oficial de descomposici\'on y ajuste estacional se ll
 %---------------------Slide 13--------------------------
 
 %\begin{section}{Procesos no estacionarios, integrados y el test de ra\'{\i}z unitaria}
-\section{Procesos no estacionarios, integrados y el test de ra\'{\i}z unitaria}
+\pagebreak\section{Procesos no estacionarios, integrados y el test de ra\'{\i}z unitaria}
 %\begin{frame}
 %\frametitle{Procesos no estacionarios, integrados y el test de ra\'{\i}z unitaria}
 
@@ -305,7 +305,7 @@ adf.test(diff(gtemp))
 %alternative hypothesis: stationary\\
 %\end{mdframed}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Ejemplo: Resultados de Test de Raíz Unitaria - Dickey-Fuller}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth,scale=0.5]{adf_ejRaizUnitaria.png}}
@@ -319,7 +319,7 @@ adf.test(diff(gtemp))
 %\begin{section}{Modelos ARIMA: modelando el corto plazo}
 %\begin{frame}
 %\frametitle{Modelos ARIMA: modelando el corto plazo}
-\section{Modelos ARIMA: modelando el corto plazo}
+\pagebreak\section{Modelos ARIMA: modelando el corto plazo}
 
 En el a\~no 1970, la metodolog\'{\i}a propuesta por George Box y Gwilym Jenkins, \cite{BoxJenkins} , dos ingenieros con formaci\'on estad\'{\i}stica sistematizan modelos estad\'{\i}sticos para el an\'alisis de series temporales univariantes, teniendo en cuenta para esto la dependencia existente entre los datos. \\
 As\'{\i}, cada observaci\'on es modelada en funci\'on de los valores anteriores, la variable tiempo, por tanto, juega un papel fundamental. 
@@ -554,7 +554,7 @@ main=(expression(AR(1)~~~phi==-.9)))
 %\begin{frame}
 %\frametitle{Simulaci\'on modelo AR(1) }
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Simulación AR(1)}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{ar.png}}
@@ -572,7 +572,7 @@ main=(expression(AR(1)~~~phi==-.9)))
 Para el caso de un proceso del tipo AR, el correlograma, representaci\'on gr\'afica de la funci\'on de autocorrelaci\'on, tendr\'a un
 comportamiento amortiguado hacia cero con todos los valores positivos, en caso de que $\theta > 0$, o bien alternando el signo, comenzando con negativo, si  $\theta < 0$.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Proceso Autoregresivo: AR(1)}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{ar1corr.png}}
@@ -586,7 +586,7 @@ comportamiento amortiguado hacia cero con todos los valores positivos, en caso d
 %\begin{frame}
 %\frametitle{Identificaci\'on modelo AR(1) }
 
-\begin{figure}[h]
+\begin{figure}[H]
 		\centering
 		\textbf{Proceso Autoregresivo: AR(1)}\par\medskip
 		\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{ar1corrb.png}}
@@ -776,7 +776,7 @@ main=(expression(MA(1), theta==-.5)))
 %\begin{frame}
 %\frametitle{Simulaci\'on modelo MA(1) }
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Ejemplo 1: Simulaci\'on modelo MA(1)}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{ma.png}}
@@ -793,7 +793,7 @@ main=(expression(MA(1), theta==-.5)))
 \subsubsection{Identificaci\'on modelo MA }
 Para la identificaci\'on de todos los componentes del modelo MA, tal como vimos para el modelo AR, se utiliza la funci\'on de autocorrelaci\'on (AFC) y la funci\'on de autocorrelaci\'on parcial (PAFC), y as\'{\i} se procede a la identificaci\'on de los componentes, en base a los gr\'aficos de los distintos modelos te\'oricos.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Autocorrelograma de proceso de media móvil MA(1), $\theta=+0.5$}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[scale=0.3]{idMA1.png}}
@@ -809,7 +809,7 @@ Para la identificaci\'on de todos los componentes del modelo MA, tal como vimos 
 \subsection{Identificaci\'on modelo ARMA}
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Autocorrelograma de proceso de media móvil MA(1), $\theta=-0.5$ }\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{idMA2.png}}
@@ -927,7 +927,7 @@ El modelo ARMA gana su I y se convierte en ARIMA cuando debe ser integrado para 
 
 Para la identificaci\'on de todos los componentes del modelo ARMA se utiliza la funci\'on de autocorrelaci\'on (AFC) y la funci\'on de autocorrelaci\'on parcial (PAFC), y as\'{\i} se procede a la identificaci\'on de los componentes estacional y no estacional por separado, en base a los gr\'aficos de los distintos modelos te\'oricos.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
 	\textbf{Proceso autoregresivo de media móvil de orden (1,1): ARMA(1,1)}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{idARMA.png}}
@@ -942,7 +942,7 @@ Para la identificaci\'on de todos los componentes del modelo ARMA se utiliza la 
 
 En resumen tendremos:
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{En resumen tendremos:}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{resumenARMA.png}}
@@ -1144,7 +1144,7 @@ plot.ts(ipc,xlab='Years',ylab='Indice de Precios al Comsumidor')
 %\begin{frame}
 %\frametitle{Ejemplo IPC en Chile}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Ejemplo IPC en Chile.}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{ipc.pdf}}
@@ -1198,7 +1198,7 @@ pacf(diff(ipc),lag=36,lwd=3)
 %\textbf{Descomposici\'on\ de la serie}\\
 \subsection{Descomposici\'on\ de la serie}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Ejemplo IPC: Descomposición de la serie de IPC}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{ipcdecomp.png}}
@@ -1223,7 +1223,7 @@ pacf(diff(ipc),lag=36,lwd=3)
 %data:  diff(ipc)\\
 %Dickey-Fuller = -5.8024, Lag order = 3, p-value = 0.01\\
 %alternative hypothesis: stationary\\
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Test de ra\'{\i}z unitaria}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{testRaizUnitIPCChile.png}}
@@ -1237,7 +1237,7 @@ pacf(diff(ipc),lag=36,lwd=3)
 %\frametitle{Ejemplo IPC en Chile}
 %
 %\textbf{Funci\'on de autocorrelaci\'on (AFC) y autocorrelaci\'on parcial (PAFC)}\\
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Funci\'on de autocorrelaci\'on (AFC) y autocorrelaci\'on parcial (PAFC)}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{acfpacdiffipc.pdf}}
@@ -1311,7 +1311,7 @@ accuracy(fit)
 %mse
 %[1] 69.80031
 %\end{frame}
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Resultado-Parámetros ajuste de modelo ARIMA(0,1,1) y Error de Forecast(MSE)}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{resultadoArimaD60.png}}
@@ -1340,7 +1340,7 @@ accuracy(fit)
 %$\left [ 6 \right ]$ $1.6465783$ $1.8174943$ $1.9738906$ $2.1188485$ $2.2545301$\\
 %
 %\end{frame}
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Pronósticos de modelo ARIMA(0,1,1)}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{pronosticoD61.png}}
@@ -1368,7 +1368,7 @@ accuracy(fit)
 %Training set $0.00467571$ $0.2701877$ $0.2012356$ $0.005434612$\\
 %\hspace{7em}MAPE\hspace{2em}MASE\hspace{2em}ACF1\\
 %Training set $0.185618$ $0.05414794$ $-0.03368001$\\
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Pronósticos de modelo AutoARIMA}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{pronosticoAutoarimaD62.png}}
@@ -1383,7 +1383,7 @@ accuracy(fit)
 %\frametitle{Ejemplo IPC en Chile}
 %\textbf{Inverse MA roots  - auto.arima}\\
 \vspace{4mm}	
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Inverse MA roots - auto.arima}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{maroots.png}}
@@ -1398,7 +1398,7 @@ accuracy(fit)
 %\frametitle{Ejemplo IPC en Chile}
 %\textbf{Pron\'ostico auto.arima}\\
 \vspace{4mm}	
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Forecasts from ARIMA(0,1,1)(0,0,1)[12] with drift}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{forecastipc.png}}
@@ -1411,7 +1411,7 @@ accuracy(fit)
 %---------------------Slide 65--------------------------
 %\begin{section}{Metodolog\'{\i}a de Estimaci\'on de un Modelo ARIMA}
 %\begin{frame}
-\section{Metodolog\'{\i}a de Estimaci\'on de un Modelo ARIMA}
+\pagebreak\section{Metodolog\'{\i}a de Estimaci\'on de un Modelo ARIMA}
 %\frametitle{Etapas de Estimaci\'on de un Modelo ARIMA}
 \subsection{Etapas de Estimaci\'on de un Modelo ARIMA}
 
@@ -1468,9 +1468,9 @@ accuracy(fit)
 %---------------------Slide 68--------------------------
 %\begin{frame}
 %\frametitle{Resumen de los pasos de Box-Jenkins}
-\section{Resumen de los pasos de Box-Jenkins}
+\pagebreak\section{Resumen de los pasos de Box-Jenkins}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\textbf{Resumen de los pasos de Box-Jenkins}\par\medskip
 	\fcolorbox{green}{blue}{\includegraphics[width=\linewidth]{box_jenkins.png}}
