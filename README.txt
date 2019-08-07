@@ -1,7 +1,7 @@
 En este proyecto se busca documentar y llevar al formato de apunte las diapositivas del curso de econometría de series de tiempo 
 del Profesor Marcelo Villena Chamorro, Facultad de Ingeniería y Ciencias, Universidad Adolfo Ibáñez, Santiago, Chile, Julio 2019.
 Archivos:
-	download-data.R - download csv file to a data directory/se debe trabajar
+	download-data.R - download csv file to a data directory/se debe trabajar de modo que toda la data de las diferentes clases(archivos csv queden en un *.Rda
 	wrangle-data.R - creates a derived dataset and saves as R object in rda directory/se debe trabajar
 	analysis.R - generates a plot and saves it to the figs directory/se debe trabajar
 Carpeta notas_est:
