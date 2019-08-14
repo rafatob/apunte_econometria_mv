@@ -5,7 +5,8 @@
 ###### Invierno 2018 Pe?alol?n ###############################################################
 ##############################################################################################
 # Set the working directory
-setwd("/Users/simon/Desktop/Econometrics/Clase 4.- TSE")
+# setwd("/Users/simon/Desktop/Econometrics/Clase 4.- TSE")
+setwd("~/projects/apunte_econometria_mv/data")
 
 ##############################################################################################
 
@@ -78,11 +79,13 @@ summary(ipsa_reg4)
 
 ##############################################################################################
 # Johansen-Procedure 
+library(urca)
 
 a<-data.frame(ipsa,cu)
 cointegration <- ca.jo(a, type="trace",ecdet="trend",spec="transitory")
 summary(cointegration)
 
+library(tsDyn)
 #Fit a VECM with Engle-Granger 2OLS estimator:
 vecm.eg<-VECM(a, lag=2)
 
