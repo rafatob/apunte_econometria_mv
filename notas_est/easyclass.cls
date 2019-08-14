@@ -250,3 +250,5 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax
 	innerrightmargin=20pt,
 	innerleftmargin=20pt,
 	backgroundcolor=gray!10!white}
+
+\usepackage{subcaption} %imagenes juntas

@@ -10,15 +10,14 @@ Existen dos enfoques metodol\'ogicos b\'asicos para modelar series de tiempo:
 		\item[(ii)] El enfoque de dominio de frecuencia (Frequency domain approach)
 	\end{itemize}
 
-\begin{frame}
+%\begin{frame}
 
 El \textbf{enfoque del dominio del tiempo} generalmente est\'a motivado por la presunci\'on de que la correlaci\'on entre los puntos adyacentes en el tiempo de los datos de una serie, se explica mejor en t\'erminos de una dependencia del valor actual en valores pasados. De esta forma, \'este enfoque se centra en modelar alg\'un valor futuro de una serie temporal como una función param\'etrica de los valores actuales y pasados.
 \\
-En este escenario, por ejemplo, utilizamos modelos de regresiones lineales sobre el valor actual de una serie temporal, utilizando como variables de lado derecho a sus propios valores pasados y los valores pasados de otras series. El seminal trabajo de Box y Jenkins y sus modelos autoregresivos (ARIMA), se encuentran en esta l\'\i{}nea, ver \cite{BoxJenkins}.
-
-\end{frame}
-
-\begin{frame}
+En este escenario, por ejemplo utilizamos modelos de regresiones lineales sobre el valor actual de una serie temporal, utilizando como variables de lado derecho a sus propios valores pasados y los valores pasados de otras series. El seminal trabajo de Box \& Jenkins, y sus modelos autorregresivos (ARIMA), se encuentra en esta línea, ver~\cite{BoxJenkins}.
+%\end{frame}
+%
+%\begin{frame}
 
 Por otro lado, \textbf{el enfoque de dominio de frecuencia} asume que las caracter\'\i{}sticas principales de inter\'es en el an\'alisis de las series de tiempo se relacionan con variaciones sinusoidales peri\'odicas o sistem\'aticas que se encuentran naturalmente en la mayor\'\i{}a de los datos.
 \\
@@ -26,7 +25,7 @@ Estas variaciones peri\'odicas a menudo son causadas por fen\'omenos biol\'ogico
 \\
 En el an\'alisis espectral, la partici\'on de los diversos tipos de variaci\'on peri\'odica en una serie temporal se lleva a cabo evaluando separadamente la varianza asociada con cada tipo de periodicidad.
 
-\end{frame}
+%\end{frame}
 \pagebreak
 %\begin{frame}
 \subsection{Ejemplo 1: Cambio climático}Nuestro primer ejemplo de serie de tiempo es la temperatura de la tierra. Observamos una aparente tendencia ascendente en la serie durante la \'ultima parte del siglo XX, la que se ha utilizado como argumento para la hip\'otesis del calentamiento global. N\'otese tambi\'en la tendencia ascendente y bastante pronunciada alrededor de 1970. La cuesti\'on de inter\'es para los defensores del calentamiento global y los oponentes es si la tendencia general es natural, o si por el contrario es causada por el ser humano.
