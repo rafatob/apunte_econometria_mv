@@ -26,9 +26,9 @@ library(quantmod) # getSymbols
 # Ejemplo 1 S&P
 
 spy <- getSymbols("SPY", from="2000-01-01", to="2010-12-01", auto.assign = FALSE)$SPY.Adjusted
-plot(spy)
+plot(spy,main="Precios SP500")
 Rspy<-log(spy)-lag(log(spy))
-plot(Rspy)
+plot(Rspy,main="Retornos SP500")
 
 ##############################################################################################
 # Ejemplo 2 APPLE
@@ -98,3 +98,57 @@ print(fit.garch)
 confint(fit.garch)
 
 ##############################################################################################
+
+# diapo36 GARCH vs Volatilidad promedio -----------------------------------
+library(rugarch)
+library(lmtest)
+getSymbols("ECH", from="2008-01-01")
+Returns = diff(log(Ad(ECH)))
+adf.test(Ad(ECH))
+adf.test(Returns[-1])
+Returns[as.character(head(index(Ad(ECH)),1))] = 0
+fit.garch <- garch(Returns, trace=FALSE)
+print(fit.garch)
+coeftest(fit.garch)
+sigmaGarch<-fit.garch[["coef"]][["a0"]]/(1-fit.garch[["coef"]][["a1"]]-fit.garch[["coef"]][["b1"]])
+sigmaAvg<-var(Returns)
+sigmas<-data.frame(sAVG=sigmaAvg,sGARCH=sigmaGarch)
+names(sigmas)<-c("sigmaAVG","sigmaGARCH")
+sigmas
+
+
+# ejemplo GARCH D39-40 ----------------------------------------------------
+
+# Ejemplo Clase -----------------------------------------------------------
+
+getSymbols('ECH', from='2008-01-01')
+Returns = diff(log(Ad(ECH)))
+adf.test(Ad(ECH))
+adf.test(Returns[-1])
+Returns[as.character(head(index(Ad(ECH)),1))] = 0
+fit.garch = garch(Returns, trace=FALSE)
+print(fit.garch)
+coeftest(fit.garch)
+sigmaGarch<- fit.garch[['coef']][['a0']]/(1-fit.garch[['coef']][['a1']]-
+                                            fit.garch[['coef']][['b1']])
+sigmaAvg=var(Returns)
+
+windowLength = 40
+foreLength = length(Returns) - windowLength
+sigmaAvgV = vector(mode='character', length=foreLength)
+sigmaGarchV <- vector(mode='character', length=foreLength)
+
+for (d in 1:foreLength){
+  ReturnsOffset = Returns[(d):(windowLength+d)]
+  fit.garch <-garch(ReturnsOffset, trace=FALSE)
+  sigmaGarch <-fit.garch[['coef']][['a0']]/(1-fit.garch[['coef']][['a1']]-
+                                              fit.garch[['coef']][['b1']])
+  sigmaAvg <- var(ReturnsOffset)
+  print(sigmaGarch);print(sigmaAvg)
+  sigmaGarchV[d]<-sigmaGarch
+  sigmaAvgV[d]<-sigmaAvg
+}
+
+plot.ts(sigmaAvgV, col = 'red', main='Volatility Average versus GARCH(1,1)')
+lines.default(sigmaGarchV, col = 'black')
+
