@@ -252,3 +252,4 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax
 	backgroundcolor=gray!10!white}
 
 \usepackage{subcaption} %imagenes juntas
+\usetikzlibrary{positioning}
